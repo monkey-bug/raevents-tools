@@ -289,9 +289,6 @@ var init_preact_module = __esm({
 // src/app.jsx
 init_preact_module();
 
-// node_modules/.pnpm/preact-iso@2.11.0_preact-render-to-string@6.6.2_preact@10.27.1__preact@10.27.1/node_modules/preact-iso/src/router.js
-init_preact_module();
-
 // node_modules/.pnpm/preact@10.27.1/node_modules/preact/hooks/dist/hooks.module.js
 init_preact_module();
 var t2;
@@ -437,6 +434,7 @@ function D2(n3, t4) {
 }
 
 // node_modules/.pnpm/preact-iso@2.11.0_preact-render-to-string@6.6.2_preact@10.27.1__preact@10.27.1/node_modules/preact-iso/src/router.js
+init_preact_module();
 var push;
 var scope;
 function isInScope(href) {
@@ -1478,6 +1476,13 @@ var openbutton = "menu_openbutton";
 var closebutton = "menu_closebutton";
 var open = "menu_open";
 
+// src/settings.js
+init_preact_module();
+var defaultSettings = {
+  basepath: location.hostname.endsWith("github.io") ? "/tools" : ""
+};
+var Settings = Q(null);
+
 // src/menu.jsx
 var icons = {
   x: /* @__PURE__ */ u4("svg", { xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", class: "bi bi-x-lg", viewBox: "0 0 16 16", children: /* @__PURE__ */ u4("path", { d: "M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" }) }),
@@ -1490,13 +1495,17 @@ function MenuButton(props) {
     _("button", { "class": closebutton, ...props }, icons.x)
   ] });
 }
+function Link({ href, children }) {
+  const settings = x2(Settings);
+  return /* @__PURE__ */ u4("a", { href: `${settings.basepath}${href}`, children });
+}
 function MenuItems() {
   return /* @__PURE__ */ u4("nav", { class: items, children: [
-    /* @__PURE__ */ u4("a", { href: "verify", children: "verify" }),
-    /* @__PURE__ */ u4("a", { href: "gamblers", children: "gamblers" }),
-    /* @__PURE__ */ u4("a", { href: "evergreen", children: "evergreen" }),
-    /* @__PURE__ */ u4("a", { href: "untracked", children: "untracked" }),
-    /* @__PURE__ */ u4("a", { href: "settings", "aria-label": "settings", children: icons.gear })
+    /* @__PURE__ */ u4(Link, { href: "/verify", children: "verify" }),
+    /* @__PURE__ */ u4(Link, { href: "/gamblers", children: "gamblers" }),
+    /* @__PURE__ */ u4(Link, { href: "/evergreen", children: "evergreen" }),
+    /* @__PURE__ */ u4(Link, { href: "/untracked", children: "untracked" }),
+    /* @__PURE__ */ u4(Link, { href: "/settings", "aria-label": "settings", children: icons.gear })
   ] });
 }
 function Menu() {
@@ -1516,19 +1525,21 @@ function Test() {
 }
 function NotFound() {
   const location2 = useLocation();
-  console.log(location2);
   return /* @__PURE__ */ u4("div", { children: location2.path });
 }
+function AppRouter() {
+  const settings = x2(Settings);
+  return /* @__PURE__ */ u4(Router, { children: [
+    /* @__PURE__ */ u4(Route, { path: `${settings.basepath}/verify`, component: Verify }),
+    /* @__PURE__ */ u4(Route, { path: `${settings.basepath}/test`, component: Test }),
+    /* @__PURE__ */ u4(Route, { default: true, component: NotFound })
+  ] });
+}
 function App() {
-  const base = location.hostname.endsWith("github.io") ? "/tools" : "";
-  return /* @__PURE__ */ u4(LocationProvider, { children: /* @__PURE__ */ u4(ErrorBoundary, { children: /* @__PURE__ */ u4("main", { children: [
+  return /* @__PURE__ */ u4(LocationProvider, { children: /* @__PURE__ */ u4(ErrorBoundary, { children: /* @__PURE__ */ u4(Settings.Provider, { value: defaultSettings, children: [
     /* @__PURE__ */ u4(Menu, {}),
-    /* @__PURE__ */ u4(Router, { children: [
-      /* @__PURE__ */ u4(Route, { path: `${base}/verify`, component: Verify }),
-      /* @__PURE__ */ u4(Route, { path: `${base}/test`, component: Test }),
-      /* @__PURE__ */ u4(Route, { default: true, component: NotFound })
-    ] })
+    /* @__PURE__ */ u4(AppRouter, {})
   ] }) }) });
 }
-G(/* @__PURE__ */ u4(App, {}), document.body);
+G(/* @__PURE__ */ u4(App, {}), document.querySelector("main"));
 //# sourceMappingURL=app.js.map

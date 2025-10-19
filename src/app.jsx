@@ -1,9 +1,11 @@
 import { render } from "preact";
+import { useContext } from "preact/hooks";
 import { LocationProvider, ErrorBoundary, Router, Route, useLocation } from "preact-iso";
 import "./app.css";
 
 import { Verify } from "./tools/verify.jsx";
 import { Menu } from "./menu.jsx";
+import { Settings, defaultSettings } from "./settings.js";
 
 function Test() {
     return <div>TEST</div>;
@@ -11,25 +13,27 @@ function Test() {
 
 function NotFound() {
     const location = useLocation();
-    console.log(location);
     return <div>{location.path}</div>;
 }
 
-function App() {
-    const base = location.hostname.endsWith("github.io") ? "/tools" : "";
+function AppRouter() {
+    const settings = useContext(Settings);
+    return <Router>
+        <Route path={`${settings.basepath}/verify`} component={Verify} />
+        <Route path={`${settings.basepath}/test`} component={Test} />
+        <Route default component={NotFound} />
+    </Router>;
+}
 
+function App() {
 	return <LocationProvider>
         <ErrorBoundary>
-            <main>
+            <Settings.Provider value={defaultSettings}>
                 <Menu />
-                <Router>
-                    <Route path={`${base}/verify`} component={Verify} />
-                    <Route path={`${base}/test`} component={Test} />
-                    <Route default component={NotFound} />
-                </Router>
-            </main>
+                <AppRouter />
+            </Settings.Provider>
         </ErrorBoundary>
     </LocationProvider>;
 }
 
-render(<App />, document.body);
+render(<App />, document.querySelector("main"));
