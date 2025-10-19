@@ -16,13 +16,15 @@ function NotFound() {
 }
 
 function App() {
+    const base = location.hostname.endsWith("github.io") ? "/tools" : "";
+
 	return <LocationProvider>
         <ErrorBoundary>
             <main>
                 <Menu />
                 <Router>
-                    <Route path="verify" component={Verify} />
-                    <Route path="test" component={Test} />
+                    <Route path={`${base}/verify`} component={Verify} />
+                    <Route path={`${base}/test`} component={Test} />
                     <Route default component={NotFound} />
                 </Router>
             </main>
