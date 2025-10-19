@@ -18,11 +18,11 @@ function MenuButton(props) {
 
 export function MenuItems() {
     return <nav class={css.items}>
-        <a href="/verify">verify</a>
-        <a href="/gamblers">gamblers</a>
-        <a href="/evergreen">evergreen</a>
-        <a href="/untracked">untracked</a>
-        <a href="/settings" aria-label="settings">{icons.gear}</a>
+        <a href="verify">verify</a>
+        <a href="gamblers">gamblers</a>
+        <a href="evergreen">evergreen</a>
+        <a href="untracked">untracked</a>
+        <a href="settings" aria-label="settings">{icons.gear}</a>
     </nav>;
 }
 

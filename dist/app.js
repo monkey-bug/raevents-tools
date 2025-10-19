@@ -1492,11 +1492,11 @@ function MenuButton(props) {
 }
 function MenuItems() {
   return /* @__PURE__ */ u4("nav", { class: items, children: [
-    /* @__PURE__ */ u4("a", { href: "/verify", children: "verify" }),
-    /* @__PURE__ */ u4("a", { href: "/gamblers", children: "gamblers" }),
-    /* @__PURE__ */ u4("a", { href: "/evergreen", children: "evergreen" }),
-    /* @__PURE__ */ u4("a", { href: "/untracked", children: "untracked" }),
-    /* @__PURE__ */ u4("a", { href: "/settings", "aria-label": "settings", children: icons.gear })
+    /* @__PURE__ */ u4("a", { href: "verify", children: "verify" }),
+    /* @__PURE__ */ u4("a", { href: "gamblers", children: "gamblers" }),
+    /* @__PURE__ */ u4("a", { href: "evergreen", children: "evergreen" }),
+    /* @__PURE__ */ u4("a", { href: "untracked", children: "untracked" }),
+    /* @__PURE__ */ u4("a", { href: "settings", "aria-label": "settings", children: icons.gear })
   ] });
 }
 function Menu() {
