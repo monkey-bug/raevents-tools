@@ -21,8 +21,8 @@ function App() {
             <main>
                 <Menu />
                 <Router>
-                    <Route path="verify" component={Verify} />
-                    <Route path="test" component={Test} />
+                    <Route path="./verify" component={Verify} />
+                    <Route path="./test" component={Test} />
                     <Route default component={NotFound} />
                 </Router>
             </main>

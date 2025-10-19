@@ -1523,8 +1523,8 @@ function App() {
   return /* @__PURE__ */ u4(LocationProvider, { children: /* @__PURE__ */ u4(ErrorBoundary, { children: /* @__PURE__ */ u4("main", { children: [
     /* @__PURE__ */ u4(Menu, {}),
     /* @__PURE__ */ u4(Router, { children: [
-      /* @__PURE__ */ u4(Route, { path: "verify", component: Verify }),
-      /* @__PURE__ */ u4(Route, { path: "test", component: Test }),
+      /* @__PURE__ */ u4(Route, { path: "./verify", component: Verify }),
+      /* @__PURE__ */ u4(Route, { path: "./test", component: Test }),
       /* @__PURE__ */ u4(Route, { default: true, component: NotFound })
     ] })
   ] }) }) });
