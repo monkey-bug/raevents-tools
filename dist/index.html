@@ -6,9 +6,15 @@
         <meta name="robots" content="noindex, nofollow">
         <title>RAEvents Tools</title>
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="/app.css">
     </head>
     <body>
-        <script type="module" src="app.js"></script>
+        <script>
+            const params = new URLSearchParams(location.search);
+            if (params.has("route")) {
+                history.replaceState(null, null, `${atob(params.get("route"))}`);
+            }
+        </script>
+        <script type="module" src="/app.js"></script>
     </body>
 </html>
